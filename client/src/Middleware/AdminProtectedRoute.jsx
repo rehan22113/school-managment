@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate,useLocation } from 'react-router-dom'
-import { useRefreshMutation } from '../Service/Api/ApiQuery';
+import { useRefreshMutation } from '../Store/Query/MainQuery';
 import useAuth from '../Hooks/useAuth';
 const AdminProtectedRoute = () => {
   const location = useLocation()
@@ -15,7 +15,7 @@ const AdminProtectedRoute = () => {
 
     if(!token && !Roles.Admin){
       console.log("roles",Roles)
-      Navigate('/adminlogin',{ state: { loc: location.pathname } })
+      Navigate('/',{ state: { loc: location.pathname } })
       console.log("Invalid User")
     }
    

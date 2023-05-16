@@ -2,10 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import PreventAfterLogin from './Middleware/PreventAfterLogin'
+import AdminProtectedRoute from './Middleware/AdminProtectedRoute'
+import TeacherProtectedRoute from './Middleware/TeacherProtectedRoute'
 
 import Home from './Pages/Home'
 import AdminDashboard from './Pages/Admin/Dashboard'
 import Main from './Pages/Admin/Dashboard/Main'
+
 // Teacher
 import TeacherDashboard from './Pages/Teacher/Dashboard' 
 import TeacherMain from './Pages/Teacher/Dashboard/TeacherMain'
@@ -24,6 +27,7 @@ import StudentFeeReport from './Pages/Admin/Dashboard/StudentFeeReport'
 //Student
 import StudentDashboard from './Pages/Student/Dashboard'
 import StudentMain from './Pages/Student/Dashboard/StudentMain'
+import StudentProtectedRoute from './Middleware/StudentProtectedRoute'
 
 function App() {
 
@@ -43,22 +47,30 @@ function App() {
         </Route>
        
        {/* Student Routes */}
+       <Route element={<StudentProtectedRoute/>}>
+
         <Route path='/dashboard/student' element={<StudentDashboard/>}>
           <Route index element={<StudentMain />} />
         </Route>
+       </Route>
 
        {/* End Student Route */}
       
 
     {/* Protected Routes */}
+    <Route element={<TeacherProtectedRoute/>}>
+
         <Route path='/dashboard/teacher' element={<TeacherDashboard/>} >
           <Route index element={<TeacherMain />}/>
         <Route path='main' element={<TeacherMain />} />
+    </Route>
 
         </Route>
     {/* </Route> */}
 
     {/* Protected Routes */}
+    <Route element={<AdminProtectedRoute />}>
+
       <Route path='/dashboard/admin' element={<AdminDashboard />} > 
         <Route index element={<Main />} />
         <Route path='main' element={<Main />} />
@@ -72,6 +84,8 @@ function App() {
         <Route path='managenotice' element={<ManageNoticeBoard />} />
         <Route path='setting' element={<ProfileSetting/>} />
       </Route>
+
+    </Route>
     {/* </Route> */}  
 
 
