@@ -2,9 +2,9 @@ import React,{useEffect} from 'react'
 import { useSelector } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import useAuth from '../Hooks/useAuth';
-import { useRefreshMutation } from '../Service/Api/ApiQuery';
+import { useRefreshMutation } from '../Store/Query/MainQuery';
 
-const VendorProtectedRoute = () => {
+const TeacherProtectedRoute = () => {
   const location = useLocation()
   const [refresh,{}]= useRefreshMutation();
   const  {RoleAction} = useAuth()
@@ -14,9 +14,9 @@ const VendorProtectedRoute = () => {
     await refresh()
     const Roles=await RoleAction();
 
-    if(!token && !Roles.Vendor){
+    if(!token && !Roles.Teacher){
 
-      Navigate('/login',{ state: { loc: location.pathname } })
+      Navigate('/',{ state: { loc: location.pathname } })
       console.log("Invalid User")
     }
     
@@ -30,4 +30,4 @@ useEffect(()=>{
   )
 }
 
-export default VendorProtectedRoute
+export default TeacherProtectedRoute
