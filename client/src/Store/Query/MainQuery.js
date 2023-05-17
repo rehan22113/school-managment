@@ -1,7 +1,7 @@
 import React from 'react'
 // import {Student,Teacher,Admin} from '../../Config/roleList'
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-// import {logout, setToken} from '../Slice/tokenSlice'
+import {logout, setToken} from '../Slice/TokenSlice'
 import jwtDecode from 'jwt-decode'
 import { logoutUser, UserInformation } from '../Slice/userSlice'
 const baseQuery = fetchBaseQuery({

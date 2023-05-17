@@ -69,7 +69,7 @@ function App() {
     {/* </Route> */}
 
     {/* Protected Routes */}
-    <Route element={<AdminProtectedRoute />}>
+     <Route element={<AdminProtectedRoute />}> 
 
       <Route path='/dashboard/admin' element={<AdminDashboard />} > 
         <Route index element={<Main />} />
@@ -86,7 +86,7 @@ function App() {
       </Route>
 
     </Route>
-    {/* </Route> */}  
+    {/* </Route>   */}
 
 
         {/* <Route path='*' element={<ErrorPage />} /> */}

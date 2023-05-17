@@ -6,6 +6,6 @@ const ROLES_LIST = require("../../config/rolesList");
 const verifyJWT = require("../../middleware/verifyJWT");
 const verifyRoles = require("../../middleware/verifyRoles");
 
-router.post("/", [reqRateLimit(10, 60), verifyJWT, verifyRoles(ROLES_LIST.Admin)], registerController.handleNewUser);
+router.post("/", [reqRateLimit(10, 60),verifyRoles(ROLES_LIST.Admin), verifyJWT], registerController.handleNewUser);
 
 module.exports = router;

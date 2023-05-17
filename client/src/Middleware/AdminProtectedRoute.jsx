@@ -10,18 +10,25 @@ const AdminProtectedRoute = () => {
   const token = useSelector((state)=>state.tokenSlice.token)
   const Navigate = useNavigate();
   const Refresh=async()=>{
-    await refresh()
+   
     const Roles=await RoleAction();
-
-    if(!token && !Roles.Admin){
-      console.log("roles",Roles)
-      Navigate('/',{ state: { loc: location.pathname } })
+    // console.log("admin role",Roles)
+    if(token && Roles.Admin){
+      console.log("Authorize")
+    }
+    else if(!token && !Roles.Admin){
+      // console.log("roles",Roles)
       console.log("Invalid User")
+      Navigate('/',{ state: { loc: location.pathname } })
     }
    
 }
+const Run = async()=>{
+  const refreshToken=await refresh()
+  console.log("rt",refreshToken)
+}
 useEffect(()=>{
-  
+  // Run()
   Refresh()
 },[])
   return (
