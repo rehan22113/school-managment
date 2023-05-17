@@ -5,6 +5,7 @@ import PreventAfterLogin from './Middleware/PreventAfterLogin'
 import AdminProtectedRoute from './Middleware/AdminProtectedRoute'
 import TeacherProtectedRoute from './Middleware/TeacherProtectedRoute'
 
+
 import Home from './Pages/Home'
 import AdminDashboard from './Pages/Admin/Dashboard'
 import Main from './Pages/Admin/Dashboard/Main'
@@ -12,6 +13,7 @@ import Main from './Pages/Admin/Dashboard/Main'
 // Teacher
 import TeacherDashboard from './Pages/Teacher/Dashboard' 
 import TeacherMain from './Pages/Teacher/Dashboard/TeacherMain'
+import TeacherSalaryReport from './Pages/Admin/Dashboard/TeacehrSalaryReport'
 import AllUser from './Pages/Admin/Dashboard/AllUser'
 import AllTeacher from './Pages/Admin/Dashboard/Allteachers'
 import AllStudent from './Pages/Admin/Dashboard/AllStudents'
@@ -28,6 +30,8 @@ import StudentFeeReport from './Pages/Admin/Dashboard/StudentFeeReport'
 import StudentDashboard from './Pages/Student/Dashboard'
 import StudentMain from './Pages/Student/Dashboard/StudentMain'
 import StudentProtectedRoute from './Middleware/StudentProtectedRoute'
+import AddNewClass from './Pages/Admin/Dashboard/AddNewClass'
+import AllClass from './Pages/Admin/Dashboard/AllClass'
 
 function App() {
 
@@ -76,10 +80,13 @@ function App() {
         <Route path='main' element={<Main />} />
         <Route path='alluser' element={<AllUser/>} />
         <Route path='allteacher' element={<AllTeacher/>} />
+        <Route path="teachersalaryreport" element={<TeacherSalaryReport />}/>
         <Route path='allstudent' element={<AllStudent/>} />
         <Route path='feereport' element={<StudentFeeReport/>} />
         <Route path='addnewstd' element={<AddNewStudent/>} />
         <Route path='addnewteacher' element={<AddNewTeacher/>} />
+        <Route path='addclass' element={<AddNewClass/>}/>
+        <Route path="allclass" element={<AllClass/>} />
         <Route path='manageactivity' element={<ManageActivity/>} />
         <Route path='managenotice' element={<ManageNoticeBoard />} />
         <Route path='setting' element={<ProfileSetting/>} />
