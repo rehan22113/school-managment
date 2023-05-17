@@ -5,10 +5,10 @@ import { useRefreshMutation } from '../Service/Api/ApiQuery';
 const RefreshToken = () => {
     
     const [Refresh,{}] = useRefreshMutation()
-  useEffect(() => {
     async function CallRefresh(){
        const res= await Refresh()
     }
+  useEffect(() => {
     CallRefresh()
 }, []);
   return (

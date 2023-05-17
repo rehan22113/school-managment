@@ -20,13 +20,13 @@ const useAuth =()=>{
     if(data){
             
         const {UserInfo} = jwt(data.accessToken)
+
+        console.log("user info",UserInfo)
         if(UserInfo.roles.includes(ROLES.Admin)){
            Admin= true
-           Student= true
 
         }
         if(UserInfo.roles.includes(ROLES.Teacher)){
-            Student= true
             Teacher = true
            
         }

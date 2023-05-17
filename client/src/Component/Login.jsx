@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {setToken} from '../Store/Slice/TokenSlice'
 import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../Store/Query/MainQuery";
 import useAuth  from "../Hooks/useAuth";
 
 const Login = () => {
+  const {state} =useLocation();
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const {RoleAction}= useAuth(); 
@@ -16,6 +17,7 @@ const Login = () => {
     password:""
   })
   const DataHandler= (e)=>{
+    console.log(state)
     const {name,value} = e.target;
     setUserData({...UserData,[name]:value})
   }
@@ -26,16 +28,22 @@ const Login = () => {
         await dispatch(setToken({accessToken}))
         const Roles = await RoleAction()
         console.log("login now",Roles);
-        if(Roles){    
-          if(Roles.Admin){
-            Navigate("/dashboard/admin")
-          }
+        if(Roles){ 
+          if(state?.loc){
+            Navigate(state.loc);
+          } 
+          else{
+
+            if(Roles.Admin){
+              Navigate("/dashboard/admin")
+            }
           else if(Roles.Vendor){
             Navigate("/dashboard/teacher")
           }
           else if(Roles.User){
             Navigate("/dashboard/student")
           }
+        }  
         }
         else{
           setIsError(true)

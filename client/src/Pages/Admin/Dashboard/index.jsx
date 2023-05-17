@@ -2,13 +2,43 @@ import React, { Fragment,useEffect,useState } from 'react'
 import {Link, useNavigate, Outlet } from 'react-router-dom'
 // import { Menu } from '@headlessui/react'
 // import { useSelector,useDispatch } from 'react-redux'
-// import { useLogoutMutation } from '../../../Service/Api/ApiQuery'
+import { useLogoutMutation } from '../../../Store/Query/MainQuery'
 // import { useGetSingleUserQuery } from '../../../Service/Api/UserQuery'
 
 const index = () => {
-  let [isOpen, setIsOpen] = useState(false)
+
+  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+  const btnDropdownRef = React.createRef();
+  const popoverDropdownRef = React.createRef();
+  const openDropdownPopover = () => {
+    setDropdownPopoverShow(true);
+  };
+  const closeDropdownPopover = () => {
+    setDropdownPopoverShow(false);
+  };
+
+  //teacher
+  const [dropdownPopoverShow1, setDropdownPopoverShow1] = React.useState(false);
+  const btnDropdownRef1 = React.createRef();
+  const popoverDropdownRef1 = React.createRef();
+  const openDropdownPopover1 = () => {
+    setDropdownPopoverShow1(true);
+  };
+  const closeDropdownPopover1 = () => {
+    setDropdownPopoverShow1(false);
+  };
+  //class
+  const [dropdownPopoverShow2, setDropdownPopoverShow2] = React.useState(false);
+  const btnDropdownRef2 = React.createRef();
+  const popoverDropdownRef2 = React.createRef();
+  const openDropdownPopover2 = () => {
+    setDropdownPopoverShow2(true);
+  };
+  const closeDropdownPopover2 = () => {
+    setDropdownPopoverShow2(false);
+  };
   const Navigate = useNavigate();
-  // const [logout,{isFetching,isLoading} ]=useLogoutMutation();
+  const [logout,{isFetching,isLoading} ]=useLogoutMutation();
   // const userID = useSelector(state=>state.isLogin.userID)
   // const {data} = useGetSingleUserQuery(userID)
   const [userData,setUserData] = useState([{
@@ -16,12 +46,10 @@ const index = () => {
     lastname:""
   }])
 
-  const Logout = async()=>{
-    const {data}=await logout();
-    console.log(data)
-    if(data){
-      Navigate('/login')
-    }
+  const LogoutUser = async()=>{
+    const data=await logout();
+ console.log(data)
+      Navigate('/')  
   }
   useEffect(()=>{
     // setUserData(data)
@@ -47,12 +75,20 @@ const index = () => {
         </Link>
       </li>
       <li>
-  <button type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+  <button 
+      ref={btnDropdownRef}
+      onClick={() => {
+                dropdownPopoverShow
+                  ? closeDropdownPopover()
+                  : openDropdownPopover();
+              }}
+               type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" >
     <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" /></svg>
     <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Students</span>
     <svg sidebar-toggle-item className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
   </button>
-  <ul id="dropdown-example" className="hidden py-2 space-y-2">
+  <ul ref={popoverDropdownRef} className= {
+                (dropdownPopoverShow ? "block " : "hidden ") + " py-2 space-y-2"}>
     <li>
     <Link to="allstudent" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Student</Link>
     </li>
@@ -66,12 +102,18 @@ const index = () => {
 </li>
 
 <li>
-  <button type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example1" data-collapse-toggle="dropdown-example1">
+  <button ref={btnDropdownRef1}
+      onClick={() => {
+                dropdownPopoverShow1
+                  ? closeDropdownPopover1()
+                  : openDropdownPopover1();
+              }} type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example1" data-collapse-toggle="dropdown-example1">
     <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" /></svg>
     <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Teachers</span>
     <svg sidebar-toggle-item className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
   </button>
-  <ul id="dropdown-example1" className="hidden py-2 space-y-2">
+  <ul ref={popoverDropdownRef1} className= {
+                (dropdownPopoverShow1 ? "block " : "hidden ") + " py-2 space-y-2"}>
     <li>
     <Link to="allteacher" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Teacher</Link>
     </li>
@@ -84,12 +126,18 @@ const index = () => {
   </ul>
 </li>
  <li>
-  <button type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-class" data-collapse-toggle="dropdown-class">
+  <button ref={btnDropdownRef2}
+      onClick={() => {
+                dropdownPopoverShow2
+                  ? closeDropdownPopover2()
+                  : openDropdownPopover2();
+              }} type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-class" data-collapse-toggle="dropdown-class">
     <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" /></svg>
     <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Class</span>
     <svg sidebar-toggle-item className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
   </button>
-  <ul id="dropdown-class" className="hidden py-2 space-y-2">
+  <ul ref={popoverDropdownRef2} className= {
+                (dropdownPopoverShow2 ? "block " : "hidden ") + " py-2 space-y-2"}>
     <li>
     <Link to="allstudent" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Class</Link>
     </li>
@@ -146,11 +194,11 @@ const index = () => {
       </li>
       
       <li>
-        <a onClick={Logout} className=" cursor-pointer flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+        <button onClick={LogoutUser} className=" w-full cursor-pointer flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
           
           <svg aria-hidden="true"  className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" /></svg>
           <span className="ml-3">Logout</span>
-        </a>
+        </button>
       </li>
     </ul>
   </div>
