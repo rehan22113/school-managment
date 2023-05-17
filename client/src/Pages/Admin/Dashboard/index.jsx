@@ -37,6 +37,16 @@ const index = () => {
   const closeDropdownPopover2 = () => {
     setDropdownPopoverShow2(false);
   };
+  //subject
+  const [dropdownPopoverShow3, setDropdownPopoverShow3] = React.useState(false);
+  const btnDropdownRef3 = React.createRef();
+  const popoverDropdownRef3 = React.createRef();
+  const openDropdownPopover3 = () => {
+    setDropdownPopoverShow3(true);
+  };
+  const closeDropdownPopover3 = () => {
+    setDropdownPopoverShow3(false);
+  };
   const Navigate = useNavigate();
   const [logout,{isFetching,isLoading} ]=useLogoutMutation();
   // const userID = useSelector(state=>state.isLogin.userID)
@@ -48,8 +58,8 @@ const index = () => {
 
   const LogoutUser = async()=>{
     const data=await logout();
- console.log(data)
-      Navigate('/')  
+    console.log(data)
+    Navigate('/')  
   }
   useEffect(()=>{
     // setUserData(data)
@@ -118,7 +128,7 @@ const index = () => {
     <Link to="allteacher" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Teacher</Link>
     </li>
     <li>
-      <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Salary Report</a>
+      <Link to="teachersalaryreport" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Salary Report</Link>
     </li>
     <li>
       <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Attendance</a>
@@ -139,10 +149,31 @@ const index = () => {
   <ul ref={popoverDropdownRef2} className= {
                 (dropdownPopoverShow2 ? "block " : "hidden ") + " py-2 space-y-2"}>
     <li>
-    <Link to="allstudent" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Class</Link>
+    <Link to="allclass" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Class</Link>
     </li>
     <li>
-      <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add New Class</a>
+      <Link to="addclass" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add New Class</Link>
+    </li>
+  </ul>
+</li>
+<li>
+  <button ref={btnDropdownRef3}
+      onClick={() => {
+                dropdownPopoverShow3
+                  ? closeDropdownPopover3()
+                  : openDropdownPopover3();
+              }} type="button" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-class" data-collapse-toggle="dropdown-class">
+    <svg aria-hidden="true" className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" /></svg>
+    <span className="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Subject</span>
+    <svg sidebar-toggle-item className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+  </button>
+  <ul ref={popoverDropdownRef3} className= {
+                (dropdownPopoverShow3 ? "block " : "hidden ") + " py-2 space-y-2"}>
+    <li>
+    <Link to="allstudent" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Subject</Link>
+    </li>
+    <li>
+      <a href="#" className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add New Subject</a>
     </li>
   </ul>
 </li>
